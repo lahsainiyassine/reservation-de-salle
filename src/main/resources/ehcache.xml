@@ -1,0 +1,41 @@
+<config xmlns='http://www.ehcache.org/v3'
+        xmlns:jsr107='http://www.ehcache.org/v3/jsr107'>
+
+    <!-- Template par défaut pour les caches -->
+    <cache-template name="default">
+        <expiry>
+            <ttl unit="minutes">10</ttl>
+        </expiry>
+        <heap unit="entries">1000</heap>
+    </cache-template>
+
+    <!-- Cache pour les entités Utilisateur -->
+    <cache alias="com.example.reservation.model.Utilisateur" uses-template="default"/>
+
+    <!-- Cache pour les entités Salle -->
+    <cache alias="com.example.reservation.model.Salle" uses-template="default"/>
+
+    <!-- Cache pour les entités Reservation -->
+    <cache alias="com.example.reservation.model.Reservation" uses-template="default"/>
+
+    <!-- Cache pour les collections de réservations -->
+    <cache alias="com.example.reservation.model.Utilisateur.reservations" uses-template="default"/>
+    <cache alias="com.example.reservation.model.Salle.reservations" uses-template="default"/>
+
+    <!-- Cache pour les résultats de requêtes Hibernate -->
+    <cache alias="default-query-results-region" uses-template="default">
+        <expiry>
+            <ttl unit="minutes">5</ttl>
+        </expiry>
+        <heap unit="entries">1000</heap>
+    </cache>
+
+    <!-- Cache pour les timestamps de mise à jour -->
+    <cache alias="default-update-timestamps-region" uses-template="default">
+        <expiry>
+            <ttl unit="minutes">60</ttl>
+        </expiry>
+        <heap unit="entries">5000</heap>
+    </cache>
+
+</config>
